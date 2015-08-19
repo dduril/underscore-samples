@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Underscore</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/css/docs.min.css" rel="stylesheet">
+    <link href="app/css/custom.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+   
+   <div class="jumbotron">
+      <div class="container">
+        <h1>Underscore</h1>
+        <p>This is a simple static site for testing Underscore functions. The site was built using Brackets and is based on a Pluralsight course on Underscore Fundamentals. npm was used to pull down Bootstrap, jQuery and Underscore and all output is rendered to simple content div placeholders.</p>
+        <p>There are many more Underscore functions and features. Collected here are a selected subset for demo purposes. Consult the official <a href="http://underscorejs.org/" target="_blank">Underscore</a> site for the full set and documentation</p>
+      </div>
+    </div>
+    
+   <div class="container">
+       <div class="row">
+          <div class="col-md-3">
+              <div class="list-group">
+                 <a href="index.html" class="list-group-item active">
+                    <h4 class="list-group-item-heading">Collections</h4>
+                  </a>
+                  <a href="index.html#each" class="list-group-item">_.each</a>
+                  <a href="index.html#map" class="list-group-item">_.map</a>
+                  <a href="index.html#reduce" class="list-group-item">_.reduce</a>
+                  <a href="index.html#find" class="list-group-item">_.find</a>
+                  <a href="index.html#filter" class="list-group-item">_.filter</a>
+                  <a href="index.html#invoke" class="list-group-item">_.invoke</a>
+                  <a href="index.html#shuffle" class="list-group-item">_.shuffle</a>
+                </div>
+           </div>
+           <div class="col-md-9">
+             
+              <a name="each"></a>
+              <p><code>_.each</code></p>
+              <div id="content_each" class="well"></div>
+              
+              <a name="map"></a><p><code>_.map</code></p>
+              <div id="content_map" class="well"></div>
+              
+              <a name="reduce"></a><p><code>_.reduce</code></p>
+              <div id="content_reduce" class="well"></div>
+              
+              <a name="find"></a><p><code>_.find</code></p>
+              <div id="content_find" class="well"></div>
+              
+              <a name="filter"></a><p><code>_.filter</code></p>
+              <div id="content_filter" class="well"></div>
+              
+              <a name="invoke"></a><p><code>_.invoke</code></p>
+              <div id="content_invoke" class="well"></div>
+              
+              <a name="shuffle"></a><p><code>_.shuffle</code></p>
+              <div id="content_shuffle" class="well"></div>
+          </div>
+           
+       </div>
+   </div>
+      
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="app/js/docs.min.js"></script>
+    <script src="node_modules/underscore/underscore-min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+     
+        // each
+        // ---------------------------------------------------
+        var names = ['apple', 'banana', 'strawberry', 'kiwi'];
+        $("#content_each").append("<p>Array example</p>");
+        _.each(names, function(element, index, list) {  
+            $("#content_each").append("Index: " + index + " - Element: " + element + "<br />");           
+        });
+        
+        var employee = { first_name: "John", last_name: "Smith"};
+        $("#content_each").append("<br /><p>Object example</p>");
+        _.each(employee, function(value, key) {
+            $("#content_each").append("Key: " + key + "<br />"); 
+            $("#content_each").append("Value: " + value + "<br />");         
+        });
+        
+        
+        // map
+        // ------------------------------
+        m = _.map(names, function(name) {
+            return name + " is mapped from an array.<br />";
+        });
+        $("#content_map").append(m);
+        
+        
+        // reduce
+        // ------------------------------
+        var values = [100, 50, 200, 300];
+        var sum = _.reduce(values, function(memo, num) {
+           $("#content_reduce").append("Calculating: " + memo + " + " + num + "<br />"); 
+            return memo + num
+        });
+        $("#content_reduce").append("<br />Total: " + sum);
+        
+        
+        // find
+        // ------------------------------------------
+        var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        evens = function(value) {
+            return value % 2 === 0;   
+        }
+        odds = function(value) {
+            return value % 2 !== 0;    
+        }
+        $("#content_find").append("values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br />");
+        $("#content_find").append("First even value: " + _.find(values, evens) + "<br />");
+        $("#content_find").append("First odd value: " + _.find(values, odds));
+        
+        
+        // filter
+        // ---------------------------------------------------------------------
+        $("#content_filter").append("values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br />");
+        $("#content_filter").append("First even value: " + _.filter(values, evens) + "<br />");
+        $("#content_filter").append("First odd value: " + _.filter(values, odds));
+        
+        
+        // invoke
+        // --------------------
+        var values = _.invoke([
+            ["John", "Lisa", "Bill", "Mary"], 
+            [5, 8, 2, 1]
+            ], 'sort');
+        _.each(values, function(value, index) {
+            $("#content_invoke").append("<strong>List number: </strong>" + (index + 1) + "<br />");
+            _.each(value, function(v) {
+                $("#content_invoke").append("<li>" + v + "</li>");
+            });
+        });
+        
+        var values = _.invoke([
+            ["John", "Lisa", "Bill", "Mary"], 
+            ], 'join', ' | ');
+
+            $("#content_invoke").append("<br />" + values);
+   
+        
+        // shuffle
+        // ----------------------------------------
+        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var shuffled_nums = _.shuffle(nums);
+        _.each(shuffled_nums, function(element) {  
+            $("#content_shuffle").append(element + "<br />");           
+        });
+        
+        
+    });
+    </script>
+</body>
+</html>
