@@ -1,3 +1,15 @@
 .navbar {
 	margin-bottom: 0px;
 }
+
+.bs-docs-sidebar .nav > li > a {
+    font-size: 18px;
+}
+
+.bs-docs-sidebar .nav .nav > li > a {
+    font-size: 15px;
+}
+
+.well {
+    margin-bottom: 40px;   
+}

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Underscore</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="app/css/docs.min.css" rel="stylesheet">
@@ -13,8 +14,48 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+  
 <body>
    
+   <header id="top">
+
+	<!-- Static navbar -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Underscore Demo</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <!--<li><a href="#">link</a></li>
+            <li><a href="#">link</a></li>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">link <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">kink</a></li>
+                <li><a href="#">link</a></li>
+              </ul>
+            </li>-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+	</header>
+	
+	
    <div class="jumbotron">
       <div class="container">
         <h1>Underscore</h1>
@@ -23,49 +64,174 @@
       </div>
     </div>
     
-   <div class="container">
-       <div class="row">
-          <div class="col-md-3">
-              <div class="list-group">
-                 <a href="index.html" class="list-group-item active">
-                    <h4 class="list-group-item-heading">Collections</h4>
-                  </a>
-                  <a href="index.html#each" class="list-group-item">_.each</a>
-                  <a href="index.html#map" class="list-group-item">_.map</a>
-                  <a href="index.html#reduce" class="list-group-item">_.reduce</a>
-                  <a href="index.html#find" class="list-group-item">_.find</a>
-                  <a href="index.html#filter" class="list-group-item">_.filter</a>
-                  <a href="index.html#invoke" class="list-group-item">_.invoke</a>
-                  <a href="index.html#shuffle" class="list-group-item">_.shuffle</a>
-                </div>
-           </div>
-           <div class="col-md-9">
-             
-              <a name="each"></a>
-              <p><code>_.each</code></p>
-              <div id="content_each" class="well"></div>
+    
+    <div class="container bs-docs-container">
+      <div class="row">
+
+		<div class="col-md-3" role="complementary">
+        <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+            <ul class="nav bs-docs-sidenav">
               
-              <a name="map"></a><p><code>_.map</code></p>
-              <div id="content_map" class="well"></div>
+                <li>
+				<a href="#_collections">Collections</a>
+				<ul class="nav">
+					<li><a href="#_each">each</a></li>
+					<li><a href="#_map">map</a></li>
+					<li><a href="#_reduce">reduce</a></li>
+					<li><a href="#_find">find</a></li>
+					<li><a href="#_filter">filter</a></li>
+					<li><a href="#_invoke">invoke</a></li>
+					<li><a href="#_shuffle">shuffle</a></li>
+				</ul>
+
+				</li>
+			</ul>
+            
+			<a class="back-to-top" href="#top">
+              Back to top
+            </a>
+            
+
+        </nav>
+        </div>
+        
+		<div class="col-md-9" role="main">
+        <div class="bs-docs-section">
+		
+		<h1 id="_collections" class="page-header">Collections</h1>
+
+		<h2 id="_each"><code>each</code></h2>
+		<pre class="prettyprint">
+    // each
+    // ---------------------------------------------------
+    var names = ['apple', 'banana', 'strawberry', 'kiwi'];
+
+    $("#content_each").append("&lt;p&gt;Array example&lt;/p&gt;");
+    _.each(names, function(element, index, list) {  
+        $("#content_each").append("Index: " + index + " - Element: " + element + "&lt;br /&gt;");           
+    });
+        
+    var employee = { first_name: "John", last_name: "Smith"};
+
+    $("#content_each").append("&lt;br /&gt;&lt;p&gt;Object example&lt;/p&gt;");
+    _.each(employee, function(value, key) {
+        $("#content_each").append("Key: " + key + "&lt;br /&gt;"); 
+        $("#content_each").append("Value: " + value + "&lt;br /&gt;");         
+    });
+		</pre>
+		<p><strong>Output</strong></p>
+        <div id="content_each" class="well"></div>
+		
+		
+		<h2 id="_map"><code>map</code></h2>
+		<pre class="prettyprint">
+        // map
+        // ------------------------------
+        m = _.map(names, function(name) {
+            return name + " is mapped from an array.&lt;br /&gt;";
+        });
+        $("#content_map").append(m);
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_map" class="well"></div>
+		
+		
+		<h2 id="_reduce"><code>reduce</code></h2>
+		<pre class="prettyprint">
+        // reduce
+        // ------------------------------
+        var values = [100, 50, 200, 300];
+        var sum = _.reduce(values, function(memo, num) {
+           $("#content_reduce").append("Calculating: " + memo + " + " + num + "&lt;br /&gt;"); 
+            return memo + num
+        });
+        $("#content_reduce").append("&lt;br /&gt;Total: " + sum);
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_reduce" class="well"></div>
               
-              <a name="reduce"></a><p><code>_.reduce</code></p>
-              <div id="content_reduce" class="well"></div>
               
-              <a name="find"></a><p><code>_.find</code></p>
-              <div id="content_find" class="well"></div>
+        <h2 id="_find"><code>find</code></h2>
+		<pre class="prettyprint">
+        // find
+        // ------------------------------------------
+        var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        evens = function(value) {
+            return value % 2 === 0;   
+        }
+        odds = function(value) {
+            return value % 2 !== 0;    
+        }
+        $("#content_find").append("values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&lt;br /&gt;");
+        $("#content_find").append("First even value: " + _.find(values, evens) + "&lt;br /&gt;");
+        $("#content_find").append("First odd value: " + _.find(values, odds));
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_find" class="well"></div>
               
-              <a name="filter"></a><p><code>_.filter</code></p>
-              <div id="content_filter" class="well"></div>
+        
+        <h2 id="_filter"><code>filter</code></h2>
+		<pre class="prettyprint">
+        // filter
+        // ---------------------------------------------------------------------
+        $("#content_filter").append("values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&lt;br /&gt;");
+        $("#content_filter").append("First even value: " + _.filter(values, evens) + "&lt;br /&gt;");
+        $("#content_filter").append("First odd value: " + _.filter(values, odds));  
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_filter" class="well"></div>
+          
+                  
+        <h2 id="_invoke"><code>invoke</code></h2>
+		<pre class="prettyprint">
+        // invoke
+        // --------------------
+        var values = _.invoke([
+            ["John", "Lisa", "Bill", "Mary"], 
+            [5, 8, 2, 1]
+            ], 'sort');
+        _.each(values, function(value, index) {
+            $("#content_invoke").append("&lt;strong&gt;List number: &lt;/strong&gt;" + (index + 1) + "&lt;br /&gt;");
+            _.each(value, function(v) {
+                $("#content_invoke").append("&lt;li&gt;" + v + "&lt;/li&gt;");
+            });
+        });
+        
+        var values = _.invoke([
+            ["John", "Lisa", "Bill", "Mary"], 
+            ], 'join', ' | ');
+
+            $("#content_invoke").append("&lt;br /&gt;" + values);
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_invoke" class="well"></div>
               
-              <a name="invoke"></a><p><code>_.invoke</code></p>
-              <div id="content_invoke" class="well"></div>
               
-              <a name="shuffle"></a><p><code>_.shuffle</code></p>
-              <div id="content_shuffle" class="well"></div>
-          </div>
-           
-       </div>
-   </div>
+        <h2 id="_shuffle"><code>shuffle</code></h2>
+		<pre class="prettyprint">
+        // shuffle
+        // ----------------------------------------
+        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var shuffled_nums = _.shuffle(nums);
+        _.each(shuffled_nums, function(element) {  
+            $("#content_shuffle").append(element + "&lt;br /&gt;");           
+        });
+		</pre>		
+		<p><strong>Output</strong></p>
+        <div id="content_shuffle" class="well"></div>
+              
+              
+		</div><!-- /row -->  
+		
+		<hr>
+		<br />
+		
+		<footer style="margin-top: 50px;">
+			<p>&nbsp;</p>
+		</footer><!-- /footer -->
+		
+    </div><!-- /container -->
+    
       
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
